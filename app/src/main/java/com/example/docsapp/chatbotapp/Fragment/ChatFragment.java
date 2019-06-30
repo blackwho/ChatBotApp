@@ -15,6 +15,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.docsapp.chatbotapp.Adapter.ChatListAdapter;
+import com.example.docsapp.chatbotapp.Data.Database.MessageObject;
 import com.example.docsapp.chatbotapp.Data.MessageModel;
 import com.example.docsapp.chatbotapp.R;
 import com.example.docsapp.chatbotapp.ViewModel.ChatFragmentViewModel;
@@ -45,6 +46,8 @@ public class ChatFragment extends Fragment implements ChatListAdapter.OnAddNewIt
     @Override
     public void onStop(){
         super.onStop();
+        mViewModel.cleanLiveData();
+        mViewModel.getMessageObject().removeObservers(this);
     }
 
     @Override
@@ -84,9 +87,9 @@ public class ChatFragment extends Fragment implements ChatListAdapter.OnAddNewIt
             public void onClick(View view) {
                 String messageString = chatEditText.getText().toString();
                 if (!messageString.isEmpty()){
-                    mViewModel.sendMessageToBot(messageString);
-                    MessageModel messageModel = new MessageModel(messageString, "sent");
-                    mAdapter.setChatList(messageModel);
+                    mViewModel.sendMessageToBot(userId, messageString, externalId);
+                    MessageObject messageObject = new MessageObject(null, messageString, "sent");
+                    mAdapter.setMessageObject(messageObject);
                     chatEditText.getText().clear();
                 }else {
                     Toast.makeText(getContext(), "Please enter message", Toast.LENGTH_LONG).show();
@@ -96,12 +99,27 @@ public class ChatFragment extends Fragment implements ChatListAdapter.OnAddNewIt
     }
 
     private void viewModelAttach(){
-        mViewModel.getMessageModel().observe(getViewLifecycleOwner(), messageModel -> {
+        mViewModel.loadUserChat(userId, externalId);
+
+        mViewModel.getUserChatList().observe(getViewLifecycleOwner(), messageObjectList -> {
+            Log.v("TAG", "messageObjectList" + messageObjectList);
+            try {
+                if (messageObjectList != null || !messageObjectList.isEmpty()){
+                    mAdapter.setMessageObjectList(messageObjectList);
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+        });
+
+        mViewModel.getMessageObject().observe(getViewLifecycleOwner(), messageModel -> {
             Log.v("TAG", "messageModel" + messageModel);
             if (messageModel != null){
-                mAdapter.setChatList(messageModel);
+                mAdapter.setMessageObject(messageModel);
             }
         });
+
     }
 
     @Override

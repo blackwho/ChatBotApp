@@ -6,6 +6,14 @@ public class MessageObject {
     private String message;
     private String flag;
 
+    public MessageObject(Long mTimeStamp, String mMessage, String mFlag){
+        this.timeStamp = mTimeStamp;
+        message = mMessage;
+        flag = mFlag;
+    }
+
+    public MessageObject(){}
+
     public Long getTimeStamp() {
         return timeStamp;
     }

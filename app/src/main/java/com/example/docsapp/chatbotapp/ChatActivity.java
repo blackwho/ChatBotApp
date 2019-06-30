@@ -29,7 +29,10 @@ public class ChatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat);
         fragmentManager = getSupportFragmentManager();
         initializeViews();
-        startChatFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("userId", "1");
+        bundle.putString("externalId", "Vishal");
+        startChatFragment(bundle);
     }
 
     private void initializeViews(){
@@ -38,7 +41,7 @@ public class ChatActivity extends AppCompatActivity {
         navigationView = findViewById(R.id.nav_view);
         setSupportActionBar(appbarLayout);
         appBar = getSupportActionBar();
-        appBar.setTitle("ChatBot");
+        appBar.setTitle("Vishal");
         appBar.setDisplayHomeAsUpEnabled(true);
         appBar.setHomeAsUpIndicator(R.drawable.ic_menu);
         attachListeners();
@@ -51,19 +54,23 @@ public class ChatActivity extends AppCompatActivity {
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
                         switch (menuItem.getItemId()) {
                             case R.id.nav_user1:
-                                Toast.makeText(getApplicationContext(), "User1 clicked", Toast.LENGTH_LONG).show();
+                                appBar.setTitle("Vishal");
+                                userConfig(1);
                                 break;
 
                             case R.id.nav_user2:
-                                Toast.makeText(getApplicationContext(), "User2 clicked", Toast.LENGTH_LONG).show();
+                                appBar.setTitle("Dk");
+                                userConfig(2);
                                 break;
 
                             case R.id.nav_user3:
-                                Toast.makeText(getApplicationContext(), "User3 clicked", Toast.LENGTH_LONG).show();
+                                appBar.setTitle("Soham");
+                                userConfig(3);
                                 break;
 
                             case R.id.nav_user4:
-                                Toast.makeText(getApplicationContext(), "User4 clicked", Toast.LENGTH_LONG).show();
+                                appBar.setTitle("Sourjo");
+                                userConfig(4);
                                 break;
                         }
                         // set item as selected to persist highlight
@@ -80,6 +87,32 @@ public class ChatActivity extends AppCompatActivity {
 
     }
 
+    private void userConfig(Integer userId){
+        Bundle bundle = new Bundle();
+        switch (userId){
+            case 1:
+                bundle.putString("userId", "1");
+                bundle.putString("externalId", "vishal");
+                startChatFragment(bundle);
+                break;
+            case 2:
+                bundle.putString("userId", "2");
+                bundle.putString("externalId", "dk");
+                startChatFragment(bundle);
+                break;
+            case 3:
+                bundle.putString("userId", "3");
+                bundle.putString("externalId", "soham");
+                startChatFragment(bundle);
+                break;
+            case 4:
+                bundle.putString("userId", "4");
+                bundle.putString("externalId", "sourjo");
+                startChatFragment(bundle);
+                break;
+        }
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -90,9 +123,10 @@ public class ChatActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void startChatFragment(){
+    private void startChatFragment(Bundle bundle){
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         ChatFragment chatFragment = new ChatFragment();
+        chatFragment.setArguments(bundle);
         transaction.replace(R.id.chat_frag_container, chatFragment, "chatFrag")
                 .commit();
     }

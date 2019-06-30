@@ -5,4 +5,6 @@
     <color name="colorAccent">#D81B60</color>
     <color name="send_bg_color">#0091EA</color>
     <color name="receive_bg_color">#A5D6A7</color>
+    <color name="light_grey">#EEEEEE</color>
+    <color name="nav_item_color">#01579B</color>
 </resources>

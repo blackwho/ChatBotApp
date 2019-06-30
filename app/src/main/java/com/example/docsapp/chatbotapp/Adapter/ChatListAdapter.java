@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.example.docsapp.chatbotapp.Data.Database.MessageObject;
 import com.example.docsapp.chatbotapp.Data.MessageModel;
 import com.example.docsapp.chatbotapp.R;
 
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatViewHolder> {
 
     private Context context;
-    private ArrayList<MessageModel> chatList;
+    private ArrayList<MessageObject> chatList;
     private Integer listSizeTrack = 0;
 
     public interface OnAddNewItem {
@@ -70,8 +71,13 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatVi
 
     }
 
-    public void setChatList(MessageModel messageModel){
-        chatList.add(messageModel);
+    public void setMessageObject(MessageObject messageObject){
+        chatList.add(messageObject);
+        notifyDataSetChanged();
+    }
+
+    public void setMessageObjectList(ArrayList<MessageObject> data){
+        chatList = data;
         notifyDataSetChanged();
     }
 
