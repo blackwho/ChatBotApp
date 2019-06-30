@@ -11,6 +11,8 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.example.docsapp.chatbotapp.Data.Database.MessageObject;
+import com.example.docsapp.chatbotapp.Data.Database.UserEntity;
 import com.example.docsapp.chatbotapp.Data.MessageModel;
 import com.example.docsapp.chatbotapp.Network.GsonRequest;
 import com.example.docsapp.chatbotapp.Network.VolleySingleton;
@@ -20,6 +22,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class AppRepository {
 
@@ -92,6 +95,11 @@ public class AppRepository {
                 .appendQueryParameter("externalID", "chirag1");
         return builder.build().toString();
 
+    }
+
+    public List<MessageObject> getChatConversation(String userId){
+        
+        return null;
     }
 
 

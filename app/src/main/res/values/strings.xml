@@ -3,4 +3,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="user_vishal">Vishal</string>
+    <string name="user_dk">Dk</string>
+    <string name="user_soham">Soham</string>
+    <string name="user_sourjo">Sourjo</string>
 </resources>

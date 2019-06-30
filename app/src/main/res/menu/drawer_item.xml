@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <group>
+        <item
+            android:id="@+id/nav_user1"
+            android:title="@string/user_vishal" />
+        <item
+            android:id="@+id/nav_user2"
+            android:title="@string/user_soham" />
+        <item
+            android:id="@+id/nav_user3"
+            android:title="@string/user_dk" />
+        <item
+            android:id="@+id/nav_user4"
+            android:title="@string/user_sourjo" />
+    </group>
+</menu>

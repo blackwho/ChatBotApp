@@ -29,6 +29,8 @@ public class ChatFragment extends Fragment implements ChatListAdapter.OnAddNewIt
     private ChatFragmentViewModel mViewModel;
     private EditText chatEditText;
     private ImageButton sendImageButton;
+    private String externalId;
+    private String userId;
 
 
     public ChatFragment() {
@@ -43,6 +45,15 @@ public class ChatFragment extends Fragment implements ChatListAdapter.OnAddNewIt
     @Override
     public void onStop(){
         super.onStop();
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            externalId = getArguments().getString("externalId");
+            userId = getArguments().getString("userId");
+        }
     }
 
     @Override
